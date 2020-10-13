@@ -3,29 +3,32 @@
 // Local
 #include "./Cabeca.hpp"
 namespace Cobra {
+namespace Corpo {
 
-Cabeca::Cabeca(Structure::Coordiante coordinate, sf::Color color, Direction direction) : Corpo{coordinate, color}, direction{direction} {
+namespace Cabeca {
+
+Cabeca::Cabeca(Structure::Coordinate coordinate, sf::Color color, Structure::Direction::Direction direction) : Corpo{coordinate, color}, direction{direction} {
 }
 
-void Cabeca::set_direction(Direction direction) {
+void Cabeca::set_direction(Structure::Direction::Direction direction) {
     this->direction = direction;
 }
-Direction Cabeca::get_direction() {
+Structure::Direction::Direction Cabeca::get_direction() {
     return this->direction;
 }
 void Cabeca::update() {
     // std::cout << "Dir: "<< this->direction << std::endl;
     switch (this->direction) {
-        case UP:
+        case Structure::Direction::UP:
             this->coordinate.y -= 1;
             break;
-        case DOWN:
+        case Structure::Direction::DOWN:
             this->coordinate.y += 1;
             break;
-        case RIGHT:
+        case Structure::Direction::RIGHT:
             this->coordinate.x += 1;
             break;
-        case LEFT:
+        case Structure::Direction::LEFT:
             this->coordinate.x -= 1;
             break;
         default:
@@ -34,4 +37,6 @@ void Cabeca::update() {
 }
 Cabeca::~Cabeca() {
 }
+}  // namespace Cabeca
+}  // namespace Corpo
 }  // namespace Cobra

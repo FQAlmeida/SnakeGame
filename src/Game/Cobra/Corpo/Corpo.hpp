@@ -6,16 +6,19 @@
 #include "../../../Structures/Direction/Direction.hpp"
 
 namespace Cobra {
+namespace Corpo {
+
 class Corpo {
    protected:
-    Structure::Coordiante coordinate;
+    Structure::Coordinate coordinate;
     sf::Color color;
 
    public:
-    Corpo(Structure::Coordiante coordinate, sf::Color color);
-    Structure::Coordiante get_coordinate();
+    Corpo(Structure::Coordinate coordinate, sf::Color color);
+    Structure::Coordinate get_coordinate();
     sf::Color get_color();
     ~Corpo();
 };
 
+}  // namespace Corpo
 }  // namespace Cobra

@@ -1,8 +1,12 @@
 #include "./Settings.hpp"
 
 namespace Settings {
+Settings* Settings::instance = nullptr;
+
 Settings::Settings() {
-    std::ifstream settings_file{"config.json"};
+    std::ifstream settings_file{"./config/config.json"};
+    this->json = nlohmann::json::parse(settings_file);
+    settings_file.close();
 }
 Screensize Settings::get_screensize() {
     return {600, 800};
@@ -23,6 +27,9 @@ Settings* Settings::get_instance() {
         iniatilize();
     }
     return instance;
+}
+nlohmann::json& Settings::get_config() {
+    return this->json;
 }
 Settings::~Settings() {
 }

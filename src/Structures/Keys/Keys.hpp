@@ -3,13 +3,14 @@
 #include <SFML/Window/Keyboard.hpp>
 
 namespace Structure {
-namespace Direction {
+namespace Keys {
 
-enum Direction {
+enum Keys {
     UP = sf::Keyboard::Up,
     DOWN = sf::Keyboard::Down,
     LEFT = sf::Keyboard::Left,
-    RIGHT = sf::Keyboard::Right
+    RIGHT = sf::Keyboard::Right,
+    ENTER = sf::Keyboard::Enter
 };
 }
 }  // namespace Structure

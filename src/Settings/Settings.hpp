@@ -5,6 +5,7 @@
 // Local
 #include "../../ThirdParty/json.hpp"
 #include "../Typedefs/Typedef.hpp"
+// TP
 
 namespace Settings {
 
@@ -15,18 +16,24 @@ struct Screensize {
 };
 
 class Settings {
+   protected:
+    static Settings *instance;
+
    private:
-    Settings *instance;
+    nlohmann::json json;
 
    public:
-    Settings *get_instance();
-    void iniatilize();
+    static Settings *get_instance();
+    static void iniatilize();
+
+   public:
     Settings();
     ~Settings();
     void set_screensize(uint height, uint width);
     uint get_height();
     uint get_width();
     Screensize get_screensize();
+    nlohmann::json& get_config();
 };
 
 }  // namespace Settings

@@ -1,30 +1,50 @@
-SRCDIR  := src/
-OBJDIR  := obj/
-BINDIR  := bin/
-NAME    := cobra
-EXE     := $(BINDIR)$(NAME)
+SRCDIR  	:= src/
+OBJDIR  	:= obj/
+BINDIR  	:= bin/
+FONTSDIR  	:= fonts/
+CONFSDIR  	:= config/
+TPDIR 		:= ThirdParty/ 
+NAME    	:= cobra
+EXE     	:= $(BINDIR)$(NAME)
 
-SFILES  := cpp
-HFILES  := hpp
-OFILES  := o
-CC      := g++
-CFLAGS  := -c -Wall 
-LFLAGS 	:= -lsfml-graphics -lsfml-window -lsfml-system
+SFILES  	:= cpp
+HFILES  	:= hpp
+OFILES  	:= o
+JSONFILES  	:= json
+FFILES  	:= ttf
+CC      	:= g++
+CFLAGS  	:= -c -Wall
+LFLAGS 		:= -lsfml-graphics -lsfml-window -lsfml-system
 
-SOURCES := $(shell find $(SRCDIR) -name "*.$(SFILES)")
-HEADERS := $(shell find $(SRCDIR) -name "*.$(HFILES)")
-OBJECTS := $(patsubst $(SRCDIR)%.$(SFILES), $(OBJDIR)%.$(OFILES), $(SOURCES))
+FONTSF 		:= $(shell find $(FONTSDIR) -name "*.$(FFILES)")
+CONFIGSF	:= $(shell find $(CONFSDIR) -name "*.$(JSONFILES)")
+FOBJECTS 	:= $(patsubst $(FONTSDIR)%.$(FFILES), $(BINDIR)$(FONTSDIR)%.$(FFILES), $(FONTSF))
+COBJECTS 	:= $(patsubst $(CONFSDIR)%.$(JSONFILES), $(BINDIR)$(CONFSDIR)%.$(JSONFILES), $(CONFIGSF))
+
+SOURCES 	:= $(shell find $(SRCDIR) -name "*.$(SFILES)")
+HEADERS 	:= $(shell find $(SRCDIR) -name "*.$(HFILES)")
+TPH 		:= $(shell find $(TPDIR) -name "*.$(HFILES)")
+OBJECTS 	:= $(patsubst $(SRCDIR)%.$(SFILES), $(OBJDIR)%.$(OFILES), $(SOURCES))
 
 ALLFILES := $(SOURCES)
 
 .PHONY: all clean
 
-all: check_folders $(EXE)
+all: check_folders $(FOBJECTS) $(COBJECTS) $(EXE)
 
-$(EXE): $(OBJECTS)
-	$(CC) $^ -o $@ $(LFLAGS) 
+$(EXE): $(OBJECTS) $(TPH)
+	$(CC) $^ -o $@ $(LFLAGS)
 
-$(OBJDIR)%$(OFILES):    $(SRCDIR)%$(SFILES) $(SRCDIR)%$(HFILES)
+$(BINDIR)$(CONFSDIR)%$(JSONFILES): $(CONFSDIR)%$(JSONFILES)
+	@rm -f $@
+	@mkdir -p $(@D)
+	cp -r $^ -t $(@D)
+$(BINDIR)$(FONTSDIR)%$(FFILES): $(FONTSDIR)%$(FFILES)
+	@rm -f $@
+	@mkdir -p $(@D)
+	cp -r $< -t $(@D)
+
+$(OBJDIR)%$(OFILES): $(SRCDIR)%$(SFILES) $(SRCDIR)%$(HFILES)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $< -o $@
 

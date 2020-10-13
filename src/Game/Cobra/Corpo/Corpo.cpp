@@ -3,10 +3,11 @@
 // Local
 #include "./Corpo.hpp"
 namespace Cobra {
+namespace Corpo {
 
-Corpo::Corpo(Structure::Coordiante coordinate, sf::Color color) : coordinate{coordinate}, color{color} {
+Corpo::Corpo(Structure::Coordinate coordinate, sf::Color color) : coordinate{coordinate}, color{color} {
 }
-Structure::Coordiante Corpo::get_coordinate() {
+Structure::Coordinate Corpo::get_coordinate() {
     return this->coordinate;
 }
 sf::Color Corpo::get_color() {
@@ -15,4 +16,5 @@ sf::Color Corpo::get_color() {
 
 Corpo::~Corpo() {
 }
+}  // namespace Corpo
 }  // namespace Cobra

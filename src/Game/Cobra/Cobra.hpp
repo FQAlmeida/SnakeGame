@@ -8,16 +8,16 @@ namespace Cobra {
 
 class Cobra {
    private:
-    std::vector<Cauda> cauda;
-    Cabeca cabeca;
+    std::vector<Corpo::Cauda::Cauda> cauda;
+    Corpo::Cabeca::Cabeca cabeca;
     size_t qtd_comida;
 
    public:
     Cobra();
     void update();
-    std::vector<Cauda> get_cauda();
-    Cabeca get_cabeca();
-    void set_direction(Direction direction);
+    std::vector<Corpo::Cauda::Cauda> get_cauda();
+    Corpo::Cabeca::Cabeca get_cabeca();
+    void set_direction(Structure::Direction::Direction direction);
     void comer(size_t qtd);
     ~Cobra();
 };

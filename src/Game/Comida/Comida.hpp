@@ -11,13 +11,13 @@ namespace Comida
 class Comida {
    private:
     size_t qtd_alimento;
-    Structure::Coordiante coordinate;
+    Structure::Coordinate coordinate;
     sf::Color color;
    public:
-    Comida(size_t qtd_alimento, Structure::Coordiante coordinate, sf::Color color);
+    Comida(size_t qtd_alimento, Structure::Coordinate coordinate, sf::Color color);
     size_t get_qtd_alimento();
     sf::Color get_color();
-    Structure::Coordiante get_coordinate();
+    Structure::Coordinate get_coordinate();
     ~Comida();
 };
 

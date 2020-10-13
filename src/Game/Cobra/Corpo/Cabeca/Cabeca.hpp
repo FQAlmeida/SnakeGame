@@ -1,17 +1,23 @@
+#pragma once
 #include "../Corpo.hpp"
+#include "../../../../Structures/Direction/Direction.hpp"
 namespace Cobra {
-enum Direction{
-    UP, DOWN, LEFT, RIGHT
-};
+namespace Corpo {
+namespace Cabeca {
+
+
 class Cabeca : public Corpo {
    private:
-    Direction direction;
+    Structure::Direction::Direction direction;
+
    public:
-    Cabeca(Structure::Coordiante coordinate, sf::Color color, Direction direction);
-    void set_direction(Direction direction);
-    Direction get_direction();
+    Cabeca(Structure::Coordinate coordinate, sf::Color color, Structure::Direction::Direction direction);
+    void set_direction(Structure::Direction::Direction direction);
+    Structure::Direction::Direction get_direction();
     void update();
     ~Cabeca();
 };
 
+}  // namespace Cabeca
+}  // namespace Corpo
 }  // namespace Cobra
